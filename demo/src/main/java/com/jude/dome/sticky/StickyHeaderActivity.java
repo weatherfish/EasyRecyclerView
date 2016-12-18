@@ -1,10 +1,10 @@
-package com.jude.dome.loadmore;
+package com.jude.dome.sticky;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.Menu;
@@ -23,10 +23,11 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
+import com.jude.easyrecyclerview.decoration.StickyHeaderDecoration;
 import com.jude.rollviewpager.Util;
 
 
-public class RefreshAndMoreActivity extends ActionBarActivity implements RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener{
+public class StickyHeaderActivity extends AppCompatActivity implements RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
     private EasyRecyclerView recyclerView;
     private FloatingActionButton top;
     private RecyclerArrayAdapter<Person> adapter;
@@ -43,7 +44,7 @@ public class RefreshAndMoreActivity extends ActionBarActivity implements Recycle
         top = (FloatingActionButton) findViewById(R.id.top);
         recyclerView = (EasyRecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        DividerDecoration itemDecoration = new DividerDecoration(Color.GRAY,Util.dip2px(this,0.5f), Util.dip2px(this,72),0);
+        DividerDecoration itemDecoration = new DividerDecoration(Color.GRAY, Util.dip2px(this, 0.5f), Util.dip2px(this, 72), 0);
         itemDecoration.setDrawLastItem(false);
         recyclerView.addItemDecoration(itemDecoration);
 
@@ -84,7 +85,10 @@ public class RefreshAndMoreActivity extends ActionBarActivity implements Recycle
                 adapter.resumeMore();
             }
         });
-
+        // StickyHeader
+        StickyHeaderDecoration decoration = new StickyHeaderDecoration(new StickyHeaderAdapter(this));
+        decoration.setIncludeHeader(false);
+        recyclerView.addItemDecoration(decoration);
         top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +103,7 @@ public class RefreshAndMoreActivity extends ActionBarActivity implements Recycle
     //第四页会返回空,意为数据加载结束
     @Override
     public void onLoadMore() {
-        Log.i("EasyRecyclerView","onLoadMore");
+        Log.i("EasyRecyclerView", "onLoadMore");
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -127,7 +131,7 @@ public class RefreshAndMoreActivity extends ActionBarActivity implements Recycle
                     return;
                 }
                 adapter.addAll(DataProvider.getPersonList(page));
-                page=1;
+                page = 1;
             }
         }, 2000);
     }

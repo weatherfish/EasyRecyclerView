@@ -9,9 +9,11 @@ import android.widget.Button;
 import com.jude.dome.collapsing.CollapsingActivity;
 import com.jude.dome.header.HeaderFooterActivity;
 import com.jude.dome.horizontal.HorizontalActivity;
+import com.jude.dome.insert.InsertActivity;
 import com.jude.dome.loadmore.RefreshAndMoreActivity;
 import com.jude.dome.multistyle.MultiStyleActivity;
 import com.jude.dome.staggeredgrid.StaggeredGridActivity;
+import com.jude.dome.sticky.StickyHeaderActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 
 /**
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     Button collapsing;
     Button staggeredGrid;
     Button horizontal;
+    Button stickyHeader;
+    Button insert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, HorizontalActivity.class));
+            }
+        });  stickyHeader = (Button) findViewById(R.id.stiky_header);
+        stickyHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, StickyHeaderActivity.class));
+            }
+        });
+        insert = (Button) findViewById(R.id.insert);
+        insert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, InsertActivity.class));
             }
         });
     }

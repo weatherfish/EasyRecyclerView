@@ -9,4 +9,6 @@
     <string name="collapsing">Collapsing</string>
     <string name="staggered_grid">StaggeredGrid</string>
     <string name="horizontal">Horizontal</string>
+    <string name="stiky_header">StickyHeader</string>
+    <string name="insert">Insert</string>
 </resources>

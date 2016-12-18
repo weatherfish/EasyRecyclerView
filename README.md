@@ -9,7 +9,7 @@ Part of the code modified from [Malinskiy/SuperRecyclerView](https://github.com/
 
 # Dependency
 ```groovy
-compile 'com.jude:easyrecyclerview:4.2.2'
+compile 'com.jude:easyrecyclerview:4.3.4'
 ```
 
 #ScreenShot
@@ -82,9 +82,10 @@ void add(T object);
 void addAll(Collection<? extends T> collection);
 void addAll(T ... items);
 void insert(T object, int index);
-void remove(T object)
-void clear()
-void sort(Comparator<? super T> comparator)
+void update(T object, int index);
+void remove(T object);
+void clear();
+void sort(Comparator<? super T> comparator);
 ```
 
 **Header&Footer**
@@ -200,7 +201,7 @@ public class PersonAdapter extends RecyclerArrayAdapter<Person> {
 ```
 
 ## Decoration
-Now there are tow commonly used decoration provide for you.  
+Now there are three commonly used decoration provide for you.  
 **DividerDecoration**  
 Usually used in LinearLayoutManager.add divider between items.
 ```java
@@ -210,7 +211,7 @@ itemDecoration.setDrawHeaderFooter(false);//whether draw divider for header and 
 recyclerView.addItemDecoration(itemDecoration);
 ```
 this is the demo:  
-<img src="http://o84n5syhk.bkt.clouddn.com/divider.jpg" width="300">
+<image src="http://o84n5syhk.bkt.clouddn.com/divider.jpg?imageView2/2/w/300" width=300/>
 
 
 **SpaceDecoration**  
@@ -223,10 +224,37 @@ itemDecoration.setPaddingHeaderFooter(false);//whether add space for header and 
 recyclerView.addItemDecoration(itemDecoration);
 ```
 this is the demo:  
-<img src="http://o84n5syhk.bkt.clouddn.com/space.jpg" width="300">
+<image src="http://o84n5syhk.bkt.clouddn.com/space.jpg?imageView2/2/w/300" width=300/>
+
+**StickHeaderDecoration**  
+Group the items,add a GroupHeaderView for each group.The usage of StickyHeaderAdapter is the same with RecyclerView.Adapter.
+this part is modified from [edubarr/header-decor](https://github.com/edubarr/header-decor)
+```java
+StickyHeaderDecoration decoration = new StickyHeaderDecoration(new StickyHeaderAdapter(this));
+decoration.setIncludeHeader(false);
+recyclerView.addItemDecoration(decoration);
+```
+for example:   
+<image src="http://7xkr5d.com1.z0.glb.clouddn.com/recyclerview_sticky.png?imageView2/2/w/300" width=300/>
 
 **for detail,see the demo**
 
+License
+-------
+
+    Copyright 2015 Jude
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
 
 
